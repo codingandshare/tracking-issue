@@ -1,0 +1,33 @@
+version: '3.1'
+services:
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root@!2345
+      MYSQL_DATABASE: tracking
+      MYSQL_USER: tracking
+      MYSQL_PASSWORD: tracking%##
+    volumes:
+      - ./data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+  tracking-service:
+    image: codingandshare/tracking-issue-service:latest
+    restart: always
+    environment:
+      DB_HOST: db
+      DB_PASS: tracking%##
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - backend
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
