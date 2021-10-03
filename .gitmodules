@@ -1,0 +1,3 @@
+[submodule "tracking-issue-service"]
+	path = tracking-issue-service
+	url = https://github.com/codingandshare/tracking-issue-service.git
